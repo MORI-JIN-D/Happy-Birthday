@@ -296,6 +296,21 @@ opacity:1;transform:translateY(0);
 }
 </style>
 
+
+<style>
+.music-bar{
+position:fixed!important;top:20px!important;right:20px!important;
+left:auto!important;bottom:auto!important;
+background:rgba(255,255,255,.92)!important;
+backdrop-filter:blur(10px);
+padding:12px 18px;border-radius:999px;
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+cursor:grab;user-select:none;z-index:10000;
+}
+.music-bar:active{cursor:grabbing;}
+.music-bar audio{width:180px;}
+</style>
+
 </head>
 <body>
 
@@ -498,6 +513,20 @@ document.getElementById('loveBtn').onclick=()=>{
  }
  document.getElementById('lovePopup').style.display='flex';
 };
+</script>
+
+
+<script>
+(()=>{const b=document.querySelector('.music-bar');if(!b)return;
+let d=false,ox=0,oy=0;
+b.onmousedown=e=>{d=true;const r=b.getBoundingClientRect();
+ox=e.clientX-r.left;oy=e.clientY-r.top;
+b.style.left=r.left+'px';b.style.top=r.top+'px';
+b.style.right='auto';b.style.bottom='auto';};
+document.onmousemove=e=>{if(!d)return;
+b.style.left=(e.clientX-ox)+'px';
+b.style.top=(e.clientY-oy)+'px';};
+document.onmouseup=()=>d=false;})();
 </script>
 
 </body>
